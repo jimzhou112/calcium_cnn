@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "normalize_input.h": "c",
+        "stdlib.h": "c"
+    }
+}

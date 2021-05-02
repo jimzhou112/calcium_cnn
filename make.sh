@@ -1,0 +1,1 @@
+gcc -o cnn -g cnn.c normalize_input.c -lm -I

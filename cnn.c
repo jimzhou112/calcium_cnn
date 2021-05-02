@@ -154,7 +154,7 @@ int main()
     static float fc_weight[NUM_LABELS][150];
     static float fc_bias[NUM_LABELS];
 
-    // Output
+    // Output arrays
     static float output[NUM_LABELS];
 
     // Load inputs

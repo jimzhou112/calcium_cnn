@@ -129,20 +129,6 @@ int main()
     const char *s = " ";
     char *token = NULL;
 
-    // static float x[N_NODE][N_WORD];
-    // static float weight[N_WORD][N_CLASS];
-    // static int edge_index[2][N_EDGE + N_NODE];
-    // static float edge_weight[N_EDGE + N_NODE];
-
-    // float buffer[N_WORD];
-
-    // static float x_mul[N_NODE][N_CLASS];
-    // static float deg[N_NODE];
-    // static float deg_inv_sqrt[N_NODE];
-    // static float norm[N_EDGE + N_NODE];
-    // static float out[N_EDGE + N_NODE][N_CLASS];
-    // static float result[N_NODE][N_CLASS];
-
     // Input arrays
     struct timeval t1, t2, tr;
     static int input[IN_CHANNELS][IN_SIZE][IN_SIZE];

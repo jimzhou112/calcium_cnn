@@ -27,4 +27,4 @@ class Simplenet(nn.Module):
 
 Baseline model (located in ./FP_model) attains 36.18% Hit 1 and 78.42% Hit 3 accuracy.
 
-Compressed model has 8-bit quantization & 60% sparsity (located in ./compressed_model) attains 39.02% Hit 1 and 73.42% Hit 3 accuracy.
+Compressed model with 8-bit quantization & 60% sparsity (located in ./compressed_model) attains 39.02% Hit 1 and 73.42% Hit 3 accuracy.

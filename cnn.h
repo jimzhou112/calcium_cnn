@@ -51,4 +51,6 @@ class Simplenet(nn.Module):
 
 #define max(x, y) (((x) >= (y)) ? (x) : (y))
 
+void cnn(const float normalized_input[IN_CHANNELS][IN_SIZE][IN_SIZE], const float conv_weight[NUM_KERNELS][IN_CHANNELS][KERNEL_SIZE][KERNEL_SIZE], float conv_bias[NUM_KERNELS], float conv_output[NUM_KERNELS][OUT_SIZE][OUT_SIZE], const float bn_weight[NUM_KERNELS], const float bn_bias[NUM_KERNELS], const float bn_running_mean[NUM_KERNELS], const float bn_running_var[NUM_KERNELS], float bn_output[NUM_KERNELS][OUT_SIZE][OUT_SIZE], float relu_output[NUM_KERNELS][OUT_SIZE][OUT_SIZE], float fc_input[150], const float fc_weight[NUM_LABELS][150], const float fc_bias[NUM_LABELS], float output[NUM_LABELS]);
+
 #endif

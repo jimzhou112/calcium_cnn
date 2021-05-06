@@ -210,10 +210,10 @@ int main()
 
     cnn(normalized_input, conv_weight, conv_bias, conv_output, bn_weight, bn_bias, bn_running_mean, bn_running_var, bn_output, relu_output, fc_input, fc_weight, fc_bias, output);
 
-    for (i = 0; i < 23; i++)
-    {
-        printf("%f\n", output[i]);
-    }
+    // for (i = 0; i < 23; i++)
+    // {
+    //     printf("%f\n", output[i]);
+    // }
 
     // Stop timer
     gettimeofday(&t2, NULL);

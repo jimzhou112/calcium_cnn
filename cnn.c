@@ -149,27 +149,4 @@ void cnn(const float normalized_input[IN_CHANNELS][IN_SIZE][IN_SIZE], const floa
     {
         printf("%f\n", output[i]);
     }
-<<<<<<< HEAD
 }
-=======
-
-    // Stop timer
-    gettimeofday(&t2, NULL);
-    timersub(&t1, &t2, &tr);
-    printf("Inference finished. \n%.5f sec elapsed.\n",
-           -tr.tv_sec - (double)tr.tv_usec / 1000000.0);
-
-    // Outputs the prediction label
-    int index = 0;
-    float max = output[index];
-    for (i = 0; i < NUM_LABELS; i++)
-    {
-        if (output[i] > max)
-        {
-            max = output[i];
-            index = i;
-        }
-    }
-    printf("%d is the prediction label.\n", index);
-}
->>>>>>> 2e0324971ccf35ecfc0b96f4de43cf354b624150

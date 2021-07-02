@@ -26,13 +26,6 @@ int main()
     static float conv_bias[NUM_KERNELS];
     static float conv_output[NUM_KERNELS][OUT_SIZE][OUT_SIZE];
 
-    // Batch normalization arrays
-    static float bn_weight[NUM_KERNELS];
-    static float bn_bias[NUM_KERNELS];
-    static float bn_running_mean[NUM_KERNELS];
-    static float bn_running_var[NUM_KERNELS];
-    static float bn_output[NUM_KERNELS][OUT_SIZE][OUT_SIZE];
-
     // Relu arrays
     static float relu_output[NUM_KERNELS][OUT_SIZE][OUT_SIZE];
 
@@ -103,70 +96,6 @@ int main()
         }
     }
 
-    // Load bn1weight
-    sprintf(file_name, "./%s/bn1weight.txt", MODEL);
-    if (!(ifp = fopen(file_name, "r")))
-    {
-        printf("File bn1weight.txt cannot be opened for read.\n");
-        return -1;
-    }
-    for (i = 0; i < NUM_KERNELS; i++)
-    {
-        if (fscanf(ifp, "%f", &bn_weight[i]) != 1)
-        {
-            printf("File bn1weight.txt is not of correct length or format\n");
-            return -1;
-        }
-    }
-
-    // Load bn1bias
-    sprintf(file_name, "./%s/bn1bias.txt", MODEL);
-    if (!(ifp = fopen(file_name, "r")))
-    {
-        printf("File bn1bias.txt cannot be opened for read.\n");
-        return -1;
-    }
-    for (i = 0; i < NUM_KERNELS; i++)
-    {
-        if (fscanf(ifp, "%f", &bn_bias[i]) != 1)
-        {
-            printf("File bn1bias.txt is not of correct length or format\n");
-            return -1;
-        }
-    }
-
-    // Load bn1running_mean
-    sprintf(file_name, "./%s/bn1running_mean.txt", MODEL);
-    if (!(ifp = fopen(file_name, "r")))
-    {
-        printf("File bn1running_mean.txt cannot be opened for read.\n");
-        return -1;
-    }
-    for (i = 0; i < NUM_KERNELS; i++)
-    {
-        if (fscanf(ifp, "%f", &bn_running_mean[i]) != 1)
-        {
-            printf("File bn1running_mean.txt is not of correct length or format\n");
-            return -1;
-        }
-    }
-
-    // Load bn1running_var
-    sprintf(file_name, "./%s/bn1running_var.txt", MODEL);
-    if (!(ifp = fopen(file_name, "r")))
-    {
-        printf("File bn1running_var.txt cannot be opened for read.\n");
-        return -1;
-    }
-    for (i = 0; i < NUM_KERNELS; i++)
-    {
-        if (fscanf(ifp, "%f", &bn_running_var[i]) != 1)
-        {
-            printf("File bn1running_var.txt is not of correct length or format\n");
-            return -1;
-        }
-    }
-
     // Load fc1weight
     sprintf(file_name, "./%s/fc1weight.txt", MODEL);
     if (!(ifp = fopen(file_name, "r")))
@@ -208,7 +137,7 @@ int main()
     // Start timer
     gettimeofday(&t1, NULL);
 
-    cnn(normalized_input, conv_weight, conv_bias, conv_output, bn_weight, bn_bias, bn_running_mean, bn_running_var, bn_output, relu_output, fc_input, fc_weight, fc_bias, output);
+    cnn(normalized_input, conv_weight, conv_bias, conv_output, relu_output, fc_input, fc_weight, fc_bias, output);
 
     // for (i = 0; i < 23; i++)
     // {
@@ -232,5 +161,5 @@ int main()
             index = i;
         }
     }
-    printf("%d is the prediction label.\n", index);
+    printf("%d is the prediction label.\n", index); //3
 }

@@ -69,24 +69,6 @@ void convolution(
     }
 }
 
-// Performs batch normalization, defined as y = \frac{x - \mathrm{E}[x]}{\sqrt{\mathrm{Var}[x] + \epsilon}} * \gamma + \beta
-void batchnorm(const float input[NUM_KERNELS][OUT_SIZE][OUT_SIZE], float output[NUM_KERNELS][OUT_SIZE][OUT_SIZE], const float bn_weight[NUM_KERNELS], const float bn_bias[NUM_KERNELS], const float bn_running_mean[NUM_KERNELS], const float bn_running_var[NUM_KERNELS])
-{
-    // Default value of 1e-5
-    float eps = 0.00001;
-
-    for (int i = 0; i < NUM_KERNELS; i++)
-    {
-        for (int j = 0; j < OUT_SIZE; j++)
-        {
-            for (int k = 0; k < OUT_SIZE; k++)
-            {
-                output[i][j][k] = ((input[i][j][k] - bn_running_mean[i]) / sqrtf(eps + bn_running_var[i])) * bn_weight[i] + bn_bias[i];
-            }
-        }
-    }
-}
-
 // Applies element-wise rectified linear unit function
 void relu(const float input[NUM_KERNELS][OUT_SIZE][OUT_SIZE], float output[NUM_KERNELS][OUT_SIZE][OUT_SIZE])
 {
@@ -118,17 +100,38 @@ void fc(const float input[150], const float weight[NUM_LABELS][150], const float
     }
 }
 
-void cnn(const float normalized_input[IN_CHANNELS][IN_SIZE][IN_SIZE], const float conv_weight[NUM_KERNELS][IN_CHANNELS][KERNEL_SIZE][KERNEL_SIZE], float conv_bias[NUM_KERNELS], float conv_output[NUM_KERNELS][OUT_SIZE][OUT_SIZE], const float bn_weight[NUM_KERNELS], const float bn_bias[NUM_KERNELS], const float bn_running_mean[NUM_KERNELS], const float bn_running_var[NUM_KERNELS], float bn_output[NUM_KERNELS][OUT_SIZE][OUT_SIZE], float relu_output[NUM_KERNELS][OUT_SIZE][OUT_SIZE], float fc_input[150], const float fc_weight[NUM_LABELS][150], const float fc_bias[NUM_LABELS], float output[NUM_LABELS])
+void cnn(const float normalized_input[IN_CHANNELS][IN_SIZE][IN_SIZE], const float conv_weight[NUM_KERNELS][IN_CHANNELS][KERNEL_SIZE][KERNEL_SIZE], float conv_bias[NUM_KERNELS], float conv_output[NUM_KERNELS][OUT_SIZE][OUT_SIZE], float relu_output[NUM_KERNELS][OUT_SIZE][OUT_SIZE], float fc_input[150], const float fc_weight[NUM_LABELS][150], const float fc_bias[NUM_LABELS], float output[NUM_LABELS])
 {
     int i, j, k;
     // Performs Convolution with 6x5x5 output
     convolution(normalized_input, conv_weight, conv_bias, conv_output);
 
-    // Performs batch normalization, defined as y = \frac{x - \mathrm{E}[x]}{\sqrt{\mathrm{Var}[x] + \epsilon}} * \gamma + \beta
-    batchnorm(conv_output, bn_output, bn_weight, bn_bias, bn_running_mean, bn_running_var);
+    // for (int i = 0; i < NUM_KERNELS; i++)
+    // {
+    //     for (int j = 0; j < OUT_SIZE; j++)
+    //     {
+    //         for (int k = 0; k < OUT_SIZE; k++)
+    //         {
+    //             printf("%f\n", conv_output[i][j][k]);
+    //         }
+    //     }
+    // }
+    // exit(1);
 
     // Applies element-wise rectified linear unit function
-    relu(bn_output, relu_output);
+    relu(conv_output, relu_output);
+
+    // for (int i = 0; i < NUM_KERNELS; i++)
+    // {
+    //     for (int j = 0; j < OUT_SIZE; j++)
+    //     {
+    //         for (int k = 0; k < OUT_SIZE; k++)
+    //         {
+    //             printf("%f\n", relu_output[i][j][k]);
+    //         }
+    //     }
+    // }
+    // exit(1);
 
     // Reshape to 1D array
     for (i = 0; i < NUM_KERNELS; i++)
@@ -145,8 +148,8 @@ void cnn(const float normalized_input[IN_CHANNELS][IN_SIZE][IN_SIZE], const floa
     // Applies a linear transformation of the form output = xA^T + b
     fc(fc_input, fc_weight, fc_bias, output);
 
-    for (i = 0; i < 23; i++)
-    {
-        printf("%f\n", output[i]);
-    }
+    // for (i = 0; i < 23; i++)
+    // {
+    //     printf("%f\n", output[i]);
+    // }
 }

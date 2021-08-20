@@ -29,4 +29,4 @@ Baseline model (located in ./FP_model) attains 37.20% Hit 1 and 76.09% Hit 3 acc
 Compressed model with 8-bit quantization & 60% sparsity (located in ./compressed_model) is outdated and needs updating.
 
 To do:
-Some variables can be declared inside cnn.c instead of cnn_test.c which don't require passed in values
+Some variables can be declared inside cnn.c instead of cnn_test.c which don't require passed in values (check other implementation to be sure it's the same)

@@ -7,7 +7,7 @@ Performance is around 0.02-0.03 ms per image.
 Implementation based on following PyTorch model:
 
 ---
-
+```
 class Simplenet(nn.Module):
 
     def __init__(self):
@@ -21,7 +21,7 @@ class Simplenet(nn.Module):
         x = x.view(x.size(0), -1)
         x = self.fc1(x)
         return x
-
+```
 ---
 
 Baseline model (located in ./FP_model) attains 37.20% Hit 1 and 76.09% Hit 3 accuracy.
